@@ -14,3 +14,9 @@ version 1.0.0 - initial version
 
 version 1.0.1 
    - upgrade to spring boot 2.0
+
+version 1.2.0
+   - added mySql database support
+   - coded reorganized for a better maintenance
+   - no protocol needed for URL saving (shortening)
+
