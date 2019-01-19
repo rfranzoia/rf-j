@@ -5,7 +5,7 @@ import javax.ws.rs.ApplicationPath;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
 
-import br.com.fr.rfj.rest.ShortnerREST;
+import br.com.fr.rfj.web.ShortUrlREST;
 
 /**
  * @author Romeu Franzoia Jr
@@ -15,7 +15,7 @@ import br.com.fr.rfj.rest.ShortnerREST;
 public class Config extends ResourceConfig {
 
     public Config() {
-    	register(ShortnerREST.class);
+    	register(ShortUrlREST.class);
     }
 
 

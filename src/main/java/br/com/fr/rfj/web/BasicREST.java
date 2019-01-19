@@ -1,4 +1,4 @@
-package br.com.fr.rfj.rest;
+package br.com.fr.rfj.web;
 
 import java.io.Serializable;
 import java.net.URI;
@@ -7,8 +7,8 @@ import java.util.List;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import br.com.fr.rfj.entity.dto.BasicAPIDTO;
-import br.com.fr.rfj.entity.dto.ResponseDTO;
+import br.com.fr.rfj.dto.BasicAPIDTO;
+import br.com.fr.rfj.dto.ResponseDTO;
 
 public class BasicREST implements Serializable {
 

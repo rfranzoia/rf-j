@@ -1,4 +1,4 @@
-package br.com.fr.rfj.entity.dto;
+package br.com.fr.rfj.dto;
 
 import java.io.Serializable;
 import java.util.Date;

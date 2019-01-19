@@ -1,22 +1,29 @@
-package br.com.fr.rfj.model;
+package br.com.fr.rfj.domain.shorturl;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class ShortUrl implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String key;
+	@Id
+	private String id;
+
 	private String protocol;
 	private String baseUrl;
 	private String urlPath;
+	private String encodedUrl;
 
-	public String getKey() {
-		return key;
+	public String getId() {
+		return id;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getProtocol() {
@@ -43,11 +50,19 @@ public class ShortUrl implements Serializable {
 		this.urlPath = urlPath;
 	}
 
+	public String getEncodedUrl() {
+		return encodedUrl;
+	}
+
+	public void setEncodedUrl(String encodedUrl) {
+		this.encodedUrl = encodedUrl;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((key == null) ? 0 : key.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -60,18 +75,17 @@ public class ShortUrl implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ShortUrl other = (ShortUrl) obj;
-		if (key == null) {
-			if (other.getKey() != null)
+		if (id == null) {
+			if (other.getId() != null)
 				return false;
-		} else if (!key.equals(other.getKey()))
+		} else if (!id.equals(other.getId()))
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "ShortUrl (" + key + ") " + protocol + baseUrl + urlPath;
+		return "ShortUrl (" + id + ") " + protocol + baseUrl + urlPath;
 	}
-	
 
 }

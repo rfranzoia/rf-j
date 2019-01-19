@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fr.rfj.service.ShortnerService;
+import br.com.fr.rfj.domain.shorturl.ShortUrlService;
 
 @RestController
 public class IndexController {
 
 	@Autowired
-	private ShortnerService service;
+	private ShortUrlService service;
 	
     @RequestMapping(value = "/{shortennedUrl}", method = RequestMethod.GET)
     public String test(@PathVariable String shortennedUrl) {

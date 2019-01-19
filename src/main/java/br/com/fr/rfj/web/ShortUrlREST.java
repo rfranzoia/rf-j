@@ -1,4 +1,4 @@
-package br.com.fr.rfj.rest;
+package br.com.fr.rfj.web;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -12,18 +12,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
-import br.com.fr.rfj.entity.dto.ResponseDTO;
-import br.com.fr.rfj.exception.ShortnerException;
-import br.com.fr.rfj.service.ShortnerService;
+import br.com.fr.rfj.domain.shorturl.ShortUrlException;
+import br.com.fr.rfj.domain.shorturl.ShortUrlService;
+import br.com.fr.rfj.dto.ResponseDTO;
 
 @Component
-@Path("v1/shortner")
-public class ShortnerREST extends BasicREST {
+@Path("v1/short")
+public class ShortUrlREST extends BasicREST {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
-	private ShortnerService service;
+	private ShortUrlService service;
 	
 	/**
 	 * @api {get} /stats
@@ -74,7 +74,7 @@ public class ShortnerREST extends BasicREST {
 		try {
 			String shortnedUrl = service.urlShort(url);
 			return Response.ok().entity(new ResponseDTO(Status.OK.getStatusCode(), shortnedUrl)).build();
-		} catch (ShortnerException e) {
+		} catch (ShortUrlException e) {
 			return badRequest(e);
 		}
 	}
