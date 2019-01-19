@@ -6,7 +6,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import br.com.fr.rfj.exception.ShortnerException;
@@ -16,7 +17,7 @@ import br.com.fr.rfj.util.KeyGenerator;
 @Service
 public class ShortnerService {
 
-	private final Logger logger = Logger.getLogger(getClass());
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 	public static final String REGEX = "([0-9]{4})([0-9]{2})";
 
 	private static final String BASE_URL = "rf.j";

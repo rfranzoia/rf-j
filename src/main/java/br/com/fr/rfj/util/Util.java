@@ -11,9 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Util {
 
