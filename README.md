@@ -12,10 +12,11 @@ Uses
  # How to use the Url Shortener
  
      - to create a shortened url open your browser at `http://<ip_address>:8080/api/v1/short/url`
-        + the shortened url will start with `http://rf.j`, but that can be changed on code, just put the desired url in the BASE_URL constant.
+        + the shortened url will start with `http://rf.j`, but that can be changed on code, 
+          just put the desired url in the BASE_URL constant.
         
-     - to use a previously created shortened url open your browser at `http://<ip_address>:8080/<shortenedu_url>`,
-       this will automatically redirect to the saved url
+     - to use a previously created shortened url open your browser at 
+       `http://<ip_address>:8080/<shortenedu_url>`, this will automatically redirect to the saved url
        
      - to list all previously saved/shortened urls `http://<ip_address>:8080/api/v1/short/`
      
@@ -24,17 +25,16 @@ Uses
 
 # Configuring and Building
 
-   - to build the docker image with the spring boot url  shorterner application run: `mvn clean package dockerfile:build`
-   
-   - to run everything you must:
+   - to run and test everything you must:
      * install docker at target machine
-     * download and run the mysql image from 
+     * download, run and configure mysql image from 
         + `docker pull mysql/mysql-server:5.7.24`
         + `docker run -p 3307:3306 --name mysql -d mysql/mysql-server:5.7.24`
-     
-     * run the database creation script
-        + `docker exec -it mysql mysql -uroot -p`
+        +  docker exec -it mysql mysql -uroot -p 
+        +  alter user 'root'@'localhost' identified by '<root_password>'
         + `grant all privileges on *.* to 'root'@'%' identified by 'password';`
+
+     * create the database and user to use it
         + `create database shortener;`
         + `CREATE TABLE `short_url` (		  
           `id` char(8) NOT NULL,
@@ -44,10 +44,13 @@ Uses
 		  `url_path` varchar(1024) NOT NULL,
 		  PRIMARY KEY (`id`),
 		  KEY `SECONDARY` (`encoded_url`)
-		) ENGINE=InnoDB DEFAULT CHARSET=latin1;`
-	   + `create user shortener;`
-	   + `grant all privileges on *.* to 'shortener'@'%' identified by 'Sh0rtener';`
+		  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;`
+	    + `create user shortener;`
+	    + `grant all privileges on *.* to 'shortener'@'%' identified by 'Sh0rtener';`
         
+     * build the docker image with the spring boot url  shorterner application run: 
+       `mvn clean package dockerfile:build`
+   
      * run the command `docker run --name linked --link mysql:mysql -p 8080:8080 -d rf-j`
      
 
