@@ -6,6 +6,7 @@ Uses
    + Java 8
    + Spring Boot
    + Spring Data (JPA/Hibernate)
+   + mySql 5.7.24
    + Docker / Docker Compose
 
      
@@ -30,11 +31,11 @@ Uses
      * download, run and configure mysql image from 
         + `docker pull mysql/mysql-server:5.7.24`
         + `docker run -p 3307:3306 --name mysql -d mysql/mysql-server:5.7.24`
-        +  docker exec -it mysql mysql -uroot -p 
-        +  alter user 'root'@'localhost' identified by '<root_password>'
+        + `docker exec -it mysql mysql -uroot -p` 
+        + `alter user 'root'@'localhost' identified by '<root_password>'`
         + `grant all privileges on *.* to 'root'@'%' identified by 'password';`
 
-     * create the database and user to use it
+     * create the database, the short_table and user that will use it
         + `create database shortener;`
         + `CREATE TABLE `short_url` (		  
           `id` char(8) NOT NULL,
