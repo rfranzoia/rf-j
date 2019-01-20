@@ -1,0 +1,10 @@
+version: '3'
+services: 
+  rf-j:
+    image: rf-j
+    networks:
+      - rf-j-network-2
+      
+networks:
+  rf-j-network-2:
+    driver: bridge
