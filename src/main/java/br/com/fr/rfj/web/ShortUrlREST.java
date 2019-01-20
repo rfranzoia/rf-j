@@ -45,7 +45,36 @@ public class ShortUrlREST extends BasicREST {
 	@Produces(MediaType.APPLICATION_JSON_VALUE)
     public Response stats() throws Exception {
         try {
-            return Response.ok().entity(new ResponseDTO(Status.OK.getStatusCode(), service.showStats())).build();
+            return Response.ok()
+            		.entity(new ResponseDTO(Status.OK.getStatusCode(), service.showStats()))
+            		.build();
+        } catch (Exception e) {
+			return badRequest(e);
+		}
+    }
+	
+	/**
+	 * @api {get} /
+	 *    List Saved Urls
+	 *    
+	 * @apiDescription
+	 *    List all saved urls
+	 *    
+	 * @apiName stats
+	 * 
+	 * @apiGroup Shortner
+	 *
+	 * @apiSuccess {ResponseDTO} responseDTO	
+	 *    Success message and saved urls listed
+	 *
+	 */
+	@GET
+	@Produces(MediaType.APPLICATION_JSON_VALUE)
+    public Response list() throws Exception {
+        try {
+            return Response.ok()
+            		.entity(new ResponseDTO(Status.OK.getStatusCode(), service.listAll()))
+            		.build();
         } catch (Exception e) {
 			return badRequest(e);
 		}

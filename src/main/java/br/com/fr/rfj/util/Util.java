@@ -2,9 +2,6 @@ package br.com.fr.rfj.util;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -136,31 +133,6 @@ public class Util {
 			e.printStackTrace();
 			throw new IllegalArgumentException(e);
 		}
-	}
-	
-	public static int sendHttpMessage(String input) throws Exception {
-		
-		final String apiKey = "AIzaSyC_t3xv_ZSi9o9KL3J4BygfXf-NUCIPOvE";
-		
-		URL url = new URL("https://fcm.googleapis.com/fcm/send");
-	    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-	    conn.setDoOutput(true);
-	    conn.setRequestMethod("POST");
-	    conn.setRequestProperty("Content-Type", "application/json");
-	    conn.setRequestProperty("Authorization", "key=" + apiKey);
-
-	    conn.setDoOutput(true);
-
-	    OutputStream os = conn.getOutputStream();
-	    os.write(input.getBytes());
-	    os.flush();
-	    os.close();
-
-	    
-	    int responseCode = conn.getResponseCode();
-	    
-	    return responseCode;
-		
 	}
 	
 	public static String getLongCode() {

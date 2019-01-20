@@ -2,6 +2,8 @@ package br.com.fr.rfj.domain.shorturl;
 
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -9,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.fr.rfj.dto.StatsDTO;
 import br.com.fr.rfj.util.KeyGenerator;
 
 @Service
@@ -23,16 +26,48 @@ public class ShortUrlService {
 	private ShortUrlRepository repository;
 
 	// lista todas urls guardadas
-	public List<String> listAll() throws ShortUrlException {
-		List<String> list = new ArrayList<>();
+	public List<ShortUrl> listAll() throws ShortUrlException {
+		List<ShortUrl> list = new ArrayList<>();
 		repository.findAll().forEach(su -> {
-			list.add(su.toString());
+			list.add(su);
 		});
 		return list;
 	}
 
-	public String showStats() {
-		return "";
+	public StatsDTO showStats() throws ShortUrlException {
+		
+		List<ShortUrl> savedUrls = listAll();
+		int totalUrls = savedUrls.size();
+		HashMap<String, Integer> baseUrls = new LinkedHashMap<>();
+		HashMap<String, Integer> protocols = new LinkedHashMap<>();
+		for (ShortUrl su : savedUrls) {
+			
+			// unique baseUrl counter
+			Integer bu = baseUrls.get(su.getBaseUrl()); 
+			if (bu != null) {
+				bu++;
+				baseUrls.replace(su.getBaseUrl(), bu);
+			} else {
+				baseUrls.put(su.getBaseUrl(), 1);
+			}
+			
+			// unique protocols counter
+			Integer p = protocols.get(su.getProtocol());
+			if (p != null) {
+				p++;
+				protocols.replace(su.getProtocol(), p);
+			} else {
+				protocols.put(su.getProtocol(), 1);
+			}
+			
+		}
+		
+		StatsDTO dto = new StatsDTO();
+		dto.setSavedUrls(totalUrls);
+		dto.setBaseUrlsCounter(baseUrls.size());
+		dto.setProtocolsCounter(protocols.size());
+		
+		return dto;
 	}
 
 	public String urlShort(String url) throws ShortUrlException {
